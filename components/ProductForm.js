@@ -9,6 +9,7 @@ export default function ProductForm({
   title:existingTitle,
   description:existingDescription,
   price:existingPrice,
+  quantity:existingQuantity,
   images:existingImages,
   category:assignedCategory,
   properties:assignedProperties,
@@ -18,6 +19,7 @@ export default function ProductForm({
   const [category,setCategory] = useState(assignedCategory || '');
   const [productProperties,setProductProperties] = useState(assignedProperties || {});
   const [price,setPrice] = useState(existingPrice || '');
+  const [quantity,setQuantity] = useState(existingQuantity || '');
   const [images,setImages] = useState(existingImages || []);
   const [goToProducts,setGoToProducts] = useState(false);
   const [isUploading,setIsUploading] = useState(false);
@@ -34,7 +36,7 @@ export default function ProductForm({
   async function saveProduct(ev) {
     ev.preventDefault();
     const data = {
-      title,description,price,images,category,
+      title,description,price,quantity,images,category,
       properties:productProperties
     };
     if (_id) {
@@ -156,11 +158,17 @@ export default function ProductForm({
           value={description}
           onChange={ev => setDescription(ev.target.value)}
         />
-        <label>Price (in USD)</label>
+        <label>Price (in EUR)</label>
         <input
           type="number" placeholder="price"
           value={price}
           onChange={ev => setPrice(ev.target.value)}
+        />
+        <label>Quantity</label>
+        <input
+          type="number" placeholder="Quantity"
+          value={quantity}
+          onChange={ev => setQuantity(ev.target.value)}
         />
         <button
           type="submit"
